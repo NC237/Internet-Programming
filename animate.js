@@ -224,6 +224,7 @@ var currentQuestionIndex = 0;
     // Set start
     var start = true;
     let score = 0;
+    var id = 0;
     // Iterate
     function iterate(id) {
     // Getting the result display section
@@ -294,15 +295,22 @@ var currentQuestionIndex = 0;
     // Evaluate method
     evaluate[0].addEventListener("click", () => { 
         if (selected == "true") {
+            score ++;
             result[0].innerHTML = "True"; 
             result[0].style.color = "green";
-            score++;
     } else {
    
     result[0].innerHTML = "False"; 
     result[0].style.color = "red";
     }
 })
+    //helper fuction to select an option
+function selectOption(selectOption, otherOptions) {
+    selectOption.style.backgroundColor = "lightgoldenrodyellow";
+    otherOptions.forEach(option =>(option.style.backgroundColor = "lightskyblue"));
+    selected = selectOption.value;
+    }
+
 }
     if (start) {
     iterate("0");
@@ -310,16 +318,16 @@ var currentQuestionIndex = 0;
    // Previous button and method
     // Next button and method
     const next = document.getElementsByClassName('next')[0]; 
-    var id = 0;
-
     next.addEventListener("click", () => {
     start = false; 
     if (id < Questions.length - 1 ) { 
         id++; 
         iterate(id); 
-        console.log(id);
+       // console.log(id);
     }else{
-        document.write("Quiz is finished ! Your Total score is : " +score+"/" + Questions.length);
+       const result = document.getElementsByClassName("result")[0];
+       result.innerHTML = 'Quiz Completed! Your total score is ${score}/${Questions.length}';
+       result.style.color = "blue";
     }
 })
 
